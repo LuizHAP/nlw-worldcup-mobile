@@ -41,6 +41,7 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
       await promptAsync();
     } catch (error) {
       console.log(error);
+      setIsUserLoading(false);
       throw error;
     } finally {
       setIsUserLoading(false);

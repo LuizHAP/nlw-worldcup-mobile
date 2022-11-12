@@ -4,12 +4,15 @@ import { api } from "../services/api";
 
 import { Game, GameProps } from "../components/Game";
 import { Loading } from "./Loading";
+import { EmptyMyPoolList } from "./EmptyMyPoolList";
 
 interface Props {
   poolId: string;
+  code: string;
+  onShare: (gameId: string) => void;
 }
 
-export function Guesses({ poolId }: Props) {
+export function Guesses({ poolId, code, onShare }: Props) {
   const [isLoading, setIsLoading] = useState(true);
   const [games, setGames] = useState<GameProps[]>([]);
   const [firstTeamPoints, setFirstTeamPoints] = useState("");
@@ -91,6 +94,9 @@ export function Guesses({ poolId }: Props) {
           setSecondTeamPoints={setSecondTeamPoints}
           onGuessConfirm={() => handleGuessConfirm(item.id)}
         />
+      )}
+      ListEmptyComponent={() => (
+        <EmptyMyPoolList code={code} onShare={onShare} />
       )}
     />
   );
